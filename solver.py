@@ -1,9 +1,10 @@
 from math import sqrt
-from typing import Tuple, Optional
+# from typing import Tuple, Optional
+# def square_equation_solver(a, b, c) -> tuple[Optional[float], Optional[float]]:
 
 
-def square_equation_solver(a, b, c) -> tuple[Optional[float], Optional[float]]:
-    if not any(map(
+def square_equation_solver(a, b, c):
+    if not all(map(
             lambda v: isinstance(v, (int, float)),
             (a, b, c),
     )):
