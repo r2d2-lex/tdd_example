@@ -1,19 +1,54 @@
 import pytest
 
 
+@pytest.fixture(params=[
+    pytest.param(
+        (1, 10, -24), (2, -12),
+        id='function_solved_another_equation_right_and_return_max_first',
+    ),
+    pytest.param(
+        (1, 3, 2), (-1, -2),
+        id='another_equation',
+    ),
+    pytest.param(
+        (3, -18, 27), (3, None),
+        id='d_equals_zero',
+    ),
+    pytest.param(
+        (5, 0, 0), (0, None),
+        id='simple_square_equation',
+    ),
+    pytest.param(
+        (0, 10, 20), (-2, None),
+        id='a_is_zero',
+    ),
+])
+def solver_test_cases(request):
+    return request.params
+
+
 @pytest.mark.parametrize('input_data, expected_data', [
-    ((1, 10, -24), (2, -12)),
-    ((1, 3, 2), (-1, -2)),
-    ((3, -18, 27), (3, None)),
-    ((5, 0, 0), (0, None)),
-    ((0, 10, 20), (-2, None)),
-], ids=[
-    'function_solved_another_equation_right_and_return_max_first',
-    'another_equation',
-    'd_equals_zero',
-    'simple_square_equation',
-    'a_is_zero',
-],
+    pytest.param(
+        (1, 10, -24), (2, -12),
+        id='function_solved_another_equation_right_and_return_max_first',
+    ),
+    pytest.param(
+        (1, 3, 2), (-1, -2),
+        id='another_equation',
+    ),
+    pytest.param(
+        (3, -18, 27), (3, None),
+        id='d_equals_zero',
+    ),
+    pytest.param(
+        (5, 0, 0), (0, None),
+        id='simple_square_equation',
+    ),
+    pytest.param(
+        (0, 10, 20), (-2, None),
+        id='a_is_zero',
+    ),
+]
 )
 def test_solver_with_some_data(input_data, expected_data):
     from solver import square_equation_solver
@@ -81,36 +116,5 @@ def test_func_returns_tuple():
     from solver import square_equation_solver
     result = square_equation_solver(1, -70, 600)
     assert isinstance(result, tuple)
-
-
-# def test_function_solved_another_equation_right_and_return_max_first():
-#     from solver import square_equation_solver
-#     result = square_equation_solver(1, 10, -24)
-#     assert result == (2, -12)
-#
-#
-# def test_another_equation():
-#     from solver import square_equation_solver
-#     result = square_equation_solver(1, 3, 2)
-#     assert result == (-1, -2)
-#
-#
-# def test_d_equals_zero():
-#     from solver import square_equation_solver
-#     result = square_equation_solver(3, -18, 27)
-#     assert result == (3, None)
-#
-#
-# def test_simple_square_equation():
-#     from solver import square_equation_solver
-#     result = square_equation_solver(5, 0, 0)
-#     assert result ==  (0, None)
-#
-#
-# def test_a_is_zero():
-#     from solver import square_equation_solver
-#     result = square_equation_solver(0, 10, 20)
-#     assert result == (-2, None)
-
 
 
